@@ -20,8 +20,11 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void checkUsernameAndPasswordCorrect(String username , String Password){
-        if (userRepository.findUserByUsernameAndPassword(username,Password) == null) throw new ApiException("Error: username or password is not correct");
+    public void checkUsernameAndPasswordCorrect(String username , String password){
+        User user = userRepository.findUserByUsername(username);
+        if (user == null) throw new ApiException("Error: username not found is system");
+
+        if(!user.getUsername().equals(username) || !user.getPassword().equals(password)) throw new ApiException("Error: username or password not correct");
     }
 
     public List<User> getAllUserByRole(String role){
@@ -30,6 +33,10 @@ public class UserService {
 
     public List<User> getAllUserByRangeAge(Integer age){
         return userRepository.getAllUserByRangeAge(age);
+    }
+
+    public User getUserByEmail(String email){
+        return userRepository.findUserByEmail(email);
     }
     public User getUserById(Integer id){
         return userRepository.findUserById(id);

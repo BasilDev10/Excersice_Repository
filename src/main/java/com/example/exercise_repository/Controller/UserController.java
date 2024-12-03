@@ -28,18 +28,23 @@ public class UserController {
         userService.checkUsernameAndPasswordCorrect(username,password);
         return ResponseEntity.ok(new ApiResponse("User enter the system successfully"));
     }
+    @GetMapping("/get-user-by-email/{email}")
+    public ResponseEntity getUserByEmail( @PathVariable String email){
 
+        User user = userService.getUserByEmail(email);
+        return user != null ? ResponseEntity.ok(user) : ResponseEntity.status(400).body(new ApiResponse("Error: users not found"));
+    }
     @GetMapping("/get-user-by-role/{role}")
     public ResponseEntity getAllUser( @PathVariable String role){
 
         List<User> users = userService.getAllUserByRole(role);
-        return users.isEmpty() ? ResponseEntity.ok(users) : ResponseEntity.status(400).body(new ApiResponse("Error: users not found"));
+        return !users.isEmpty() ? ResponseEntity.ok(users) : ResponseEntity.status(400).body(new ApiResponse("Error: users not found"));
     }
     @GetMapping("/get-user-by-range-age/{age}")
     public ResponseEntity getAllUser( @PathVariable Integer age ){
 
         List<User> users = userService.getAllUserByRangeAge(age);
-        return users.isEmpty() ? ResponseEntity.ok(users) : ResponseEntity.status(400).body(new ApiResponse("Error: users not found"));
+        return !users.isEmpty() ? ResponseEntity.ok(users) : ResponseEntity.status(400).body(new ApiResponse("Error: users not found"));
     }
 
     @PostMapping("/add")
