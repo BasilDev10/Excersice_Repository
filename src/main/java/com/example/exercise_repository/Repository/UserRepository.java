@@ -18,6 +18,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     List<User> findUserByRole(String role);
 
-    @Query("select u from User u where u.age between ?1 and ?2")
-    List<User> getAllUserByRangeAge(Integer min , Integer max);
+    @Query("select u from User u where u.age >=?1")
+    List<User> getAllUserByRangeAge(Integer age );
 }

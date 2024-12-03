@@ -28,8 +28,8 @@ public class UserService {
         return userRepository.findUserByRole(role);
     }
 
-    public List<User> getAllUserByRangeAge(Integer min ,Integer max){
-        return userRepository.getAllUserByRangeAge(min,max);
+    public List<User> getAllUserByRangeAge(Integer age){
+        return userRepository.getAllUserByRangeAge(age);
     }
     public User getUserById(Integer id){
         return userRepository.findUserById(id);

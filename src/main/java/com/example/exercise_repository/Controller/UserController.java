@@ -35,10 +35,10 @@ public class UserController {
         List<User> users = userService.getAllUserByRole(role);
         return users.isEmpty() ? ResponseEntity.ok(users) : ResponseEntity.status(400).body(new ApiResponse("Error: users not found"));
     }
-    @GetMapping("/get-user-by-range-age/{min}/{max}")
-    public ResponseEntity getAllUser( @PathVariable Integer min , @PathVariable Integer max){
+    @GetMapping("/get-user-by-range-age/{age}")
+    public ResponseEntity getAllUser( @PathVariable Integer age ){
 
-        List<User> users = userService.getAllUserByRangeAge(min,max);
+        List<User> users = userService.getAllUserByRangeAge(age);
         return users.isEmpty() ? ResponseEntity.ok(users) : ResponseEntity.status(400).body(new ApiResponse("Error: users not found"));
     }
 
